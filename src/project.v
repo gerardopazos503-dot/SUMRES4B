@@ -21,8 +21,8 @@ module tt_um_SUMADOR_RESTADOR (
     wire [3:0] B;
     wire BTN;
 
-    assign A   = ui_in[7:4];
-    assign B   = ui_in[3:0];
+    assign A = {ui_in[4], ui_in[5], ui_in[6], ui_in[7]};
+    assign B = {ui_in[0], ui_in[1], ui_in[2], ui_in[3]};
     assign BTN = uio_in[0];
 
     // Resultado
@@ -37,8 +37,15 @@ module tt_um_SUMADOR_RESTADOR (
     );
 
     // Salidas
-    assign uo_out[4:0] = RESULT;
-    assign uo_out[7:5] = 3'b000;
+    assign uo_out[7:3] = {
+        RESULT[0],
+        RESULT[1],
+        RESULT[2],
+        RESULT[3],
+        RESULT[4]
+    };
+    
+    assign uo_out[2:0] = 3'b000;
 
     // Pines bidireccionales sin utilizar
     assign uio_out = 8'b00000000;
